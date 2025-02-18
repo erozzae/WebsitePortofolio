@@ -12,7 +12,9 @@ Route::controller(RegisterController::class)->group(function(){
 
 Route::middleware('auth:sanctum')->group(function(){
     Route::controller(HomeController::class)->group(function(){
-        Route::get('/home','greeting');
-        Route::post('/home','updateGreeting');
+        Route::get('/home','home');
+
+        Route::post('/home/greeting','updateGreeting');
+        Route::post('/home/about_me','updateAboutMe');
     });
 });

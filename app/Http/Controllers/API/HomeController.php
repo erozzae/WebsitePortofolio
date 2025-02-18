@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Validator;
 
 class HomeController extends BaseController
 {
-    public function greeting():JsonResponse{
+    public function home():JsonResponse{
         $home = Home::findOrFail(1);
 
         return $this->sendResponse( $home, 'Retrieved  successfully.');
@@ -31,8 +31,28 @@ class HomeController extends BaseController
              'greeting'=> $request->greeting
         ]);
 
-        return $this->sendResponse($greeting, 'updated successfully');
+        return $this->sendResponse($greeting, 'Updated Successfully');
     }
+
+    public function updateAboutMe(Request $request){
+        $validator = Validator::make($request->all(), [
+            'about_me' => 'required',
+        ]);
+
+
+        if ($validator->fails()) {
+            return $this->sendError('Validation Error.', $validator->errors());
+        }
+
+        $about_me = Home::findOrFail(1);
+
+        $about_me->update([
+             'about_me'=> $request->about_me
+        ]);
+
+        return $this->sendResponse($about_me, 'Updated Successfully');
+    }
+
 
 
 }
