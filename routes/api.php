@@ -11,5 +11,8 @@ Route::controller(RegisterController::class)->group(function(){
 });
 
 Route::middleware('auth:sanctum')->group(function(){
-    Route::resource('home',HomeController::class);
+    Route::controller(HomeController::class)->group(function(){
+        Route::get('/home','greeting');
+        Route::post('/home','updateGreeting');
+    });
 });
