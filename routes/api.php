@@ -8,6 +8,7 @@ use App\Http\Controllers\API\RegisterController;
 Route::controller(RegisterController::class)->group(function(){
     Route::post('/register','register');
     Route::post('/login','login');
+    Route::post('/logout','logout')->middleware('auth:sanctum');
 });
 
 Route::middleware('auth:sanctum')->group(function(){
